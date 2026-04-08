@@ -15,6 +15,11 @@ class User_model extends CI_Model {
         return $query->num_rows() > 0;
     }
 
+    public function get_by_email($email) {
+        $query = $this->db->get_where($this->table, array('email' => $email));
+        return $query->row_array();
+    }
+
     public function create($data) {
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();
