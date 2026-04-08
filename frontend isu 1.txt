@@ -1,0 +1,15 @@
+buatkan issue.md berisi planning untuk nanti di implementasikan oleh junior programmer atau AI model yang lebih murah 
+
+isi dari planning nya adalah seperti berikut
+
+buatkan frontend dari fitur yang sudah ada yaitu :
+- register user (lengkap dengan form validationnya)
+- login user (lengkap dengan form validationnya)
+- dashboard
+
+Gunakan : 
+Tailwind CSS 
+
+Catatan : aplikasi ini nantinya akan digunakan sebagai aplikasi file manager (upload foto/video serta menonton video bergaya youtube)
+
+jelaskan tahapan yang harus dilakukan untuk mengimplementasikan fitur ini, anggap nanti yang menimplementasikan adalah junior programmer atau model AI yang lebih murah.

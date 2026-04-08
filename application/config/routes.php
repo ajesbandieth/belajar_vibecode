@@ -53,6 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Frontend Routes
+$route['login'] = 'AppController/login';
+$route['register'] = 'AppController/register';
+$route['dashboard'] = 'AppController/dashboard';
+$route['logout'] = 'AppController/logout';
+
 // API Routes
 $route['api/users/current']['get'] = 'api/UserController/current_user';
 $route['api/users/login']['post'] = 'api/UserController/login';
