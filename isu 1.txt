@@ -1,0 +1,38 @@
+buatkan issue.md berisi planning untuk nanti di implementasikan oleh junior programmer atau AI model yang lebih murah 
+
+isi dari planning nya adalah seperti berikut
+
+buat table users:
+id integer auto increment
+name varchar 255 not null
+email varchar 255 not null
+password varchar 255 not null (password merupakan hash dari bcrypt)
+created_at timestamp default current_timestamp
+
+buatkan CRUD untuk user baru
+
+buatkan API untuk registrasi user baru
+
+Endpoint : POST /api/users
+
+Request Body :
+
+{
+	"name" : "azis",
+	"email" : "azis@local.com",
+	"password" : "rahasia"
+}
+
+Response Body (Succees):
+
+{
+	"data" : "sukses"
+}
+
+Response Body (Error):
+
+{
+	"data" : "Email sudah terdaftar"
+}
+
+jelaskan tahapan yang harus dilakukan untuk mengimplementasikan fitur ini, anggap nanti yang menimplementasikan adalah junior programmer atau model AI yang lebih murah.

@@ -6,6 +6,35 @@ class UserController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('User_model');
+        $this->load->model('Session_model');
+    }
+
+    public function login() {
+        $input = json_decode($this->input->raw_input_stream, true);
+
+        if (!isset($input['email']) || empty($input['email']) || 
+            !isset($input['password']) || empty($input['password'])) {
+            return $this->output
+                ->set_status_header(400)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('data' => 'Email dan password wajib diisi')));
+        }
+
+        $user = $this->User_model->get_by_email($input['email']);
+
+        if (!$user || !password_verify($input['password'], $user['password'])) {
+            return $this->output
+                ->set_status_header(401)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('data' => 'Email atau password salah')));
+        }
+
+        $token = $this->Session_model->create_session($user['id']);
+
+        return $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array('data' => $token)));
     }
 
     public function register() {
