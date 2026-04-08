@@ -73,3 +73,7 @@ $route['api/categories']['get'] = 'api/CategoryController/index';
 $route['api/categories/(:num)']['get'] = 'api/CategoryController/show/$1';
 $route['api/categories/(:num)']['put'] = 'api/CategoryController/update/$1';
 $route['api/categories/(:num)']['delete'] = 'api/CategoryController/destroy/$1';
+
+$route['api/files/upload']['post'] = 'api/FileController/upload';
+$route['api/files']['get'] = 'api/FileController/index';
+$route['api/files/(:num)']['delete'] = 'api/FileController/destroy/$1';
