@@ -9,6 +9,43 @@ class UserController extends CI_Controller {
         $this->load->model('Session_model');
     }
 
+    public function current_user() {
+        $auth_header = $this->input->get_request_header('Authorization', TRUE);
+
+        if (!$auth_header || strpos($auth_header, 'Bearer ') !== 0) {
+            return $this->output
+                ->set_status_header(401)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('data' => 'Unauthorized')));
+        }
+
+        $token = substr($auth_header, 7);
+        $session = $this->Session_model->get_by_token($token);
+
+        if (!$session) {
+            return $this->output
+                ->set_status_header(401)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('data' => 'Unauthorized')));
+        }
+
+        $user = $this->User_model->get_by_id($session['user_id']);
+
+        if (!$user) {
+            return $this->output
+                ->set_status_header(401)
+                ->set_content_type('application/json')
+                ->set_output(json_encode(array('data' => 'Unauthorized')));
+        }
+
+        unset($user['password']);
+
+        return $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json')
+            ->set_output(json_encode(array('data' => $user)));
+    }
+
     public function login() {
         $input = json_decode($this->input->raw_input_stream, true);
 

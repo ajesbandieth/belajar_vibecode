@@ -1,0 +1,30 @@
+buatkan issue.md berisi planning untuk nanti di implementasikan oleh junior programmer atau AI model yang lebih murah 
+
+isi dari planning nya adalah seperti berikut
+
+buatkan API untuk get user saat ini yang sedang login
+
+Endpoint : GET /api/users/current
+
+Headers : 
+- Authorization : Bearer <token> (token adalah token yang berada di table users)
+
+Response Body (Succees):
+
+{
+	"data" : {
+		"id" : 1,
+		"name" : "azis",
+		"email" : "azis@local.com",
+		"created_at" : "timestamp"
+	}
+}
+
+
+Response Body (Error):
+
+{
+	"data" : "Unauthorized"
+}
+
+jelaskan tahapan yang harus dilakukan untuk mengimplementasikan fitur ini, anggap nanti yang menimplementasikan adalah junior programmer atau model AI yang lebih murah.

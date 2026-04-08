@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 // API Routes
+$route['api/users/current']['get'] = 'api/UserController/current_user';
 $route['api/users/login']['post'] = 'api/UserController/login';
 $route['api/users']['post'] = 'api/UserController/register';
 $route['api/users']['get'] = 'api/UserController/index';
