@@ -67,3 +67,9 @@ $route['api/users']['get'] = 'api/UserController/index';
 $route['api/users/(:num)']['get'] = 'api/UserController/show/$1';
 $route['api/users/(:num)']['put'] = 'api/UserController/update/$1';
 $route['api/users/(:num)']['delete'] = 'api/UserController/destroy/$1';
+
+$route['api/categories']['post'] = 'api/CategoryController/register';
+$route['api/categories']['get'] = 'api/CategoryController/index';
+$route['api/categories/(:num)']['get'] = 'api/CategoryController/show/$1';
+$route['api/categories/(:num)']['put'] = 'api/CategoryController/update/$1';
+$route['api/categories/(:num)']['delete'] = 'api/CategoryController/destroy/$1';
