@@ -111,10 +111,10 @@
         // Authentication logic
         async function checkAuth() {
             const token = localStorage.getItem('auth_token');
-            if (!token) { window.location.href = '/login'; return; }
+            if (!token) { window.location.href = BASE_URL + 'login'; return; }
 
             try {
-                const response = await fetch('/api/users/current', {
+                const response = await fetch(BASE_URL + 'api/users/current', {
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
 
@@ -128,16 +128,16 @@
                     if (typeof initPage === 'function') initPage(result.data);
                 } else {
                     localStorage.removeItem('auth_token');
-                    window.location.href = '/login';
+                    window.location.href = BASE_URL + 'login';
                 }
             } catch (error) {
-                window.location.href = '/login';
+                window.location.href = BASE_URL + 'login';
             }
         }
 
         document.getElementById('logoutBtn').addEventListener('click', () => {
             localStorage.removeItem('auth_token');
-            window.location.href = '/login';
+            window.location.href = BASE_URL + 'login';
         });
 
         // Run auth check on every page using this layout
@@ -154,7 +154,7 @@
             
             try {
                 const token = localStorage.getItem('auth_token');
-                const response = await fetch('/api/categories', {
+                const response = await fetch(BASE_URL + 'api/categories', {
                     headers: { 'Authorization': 'Bearer ' + token }
                 });
                 if (response.ok) {
@@ -222,7 +222,7 @@
                 const token = localStorage.getItem('auth_token');
 
                 try {
-                    const response = await fetch('/api/files/upload', {
+                    const response = await fetch(BASE_URL + 'api/files/upload', {
                         method: 'POST',
                         headers: { 'Authorization': 'Bearer ' + token },
                         body: formData

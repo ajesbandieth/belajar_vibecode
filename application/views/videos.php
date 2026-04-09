@@ -161,7 +161,7 @@ include 'layout/sidebar.php';
                 limit: itemsPerPage
             });
 
-            const response = await fetch(`/api/files?${params.toString()}`, {
+            const response = await fetch(BASE_URL + `api/files?${params.toString()}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             
@@ -203,7 +203,7 @@ include 'layout/sidebar.php';
             grid.innerHTML += `
                 <div class="video-card group cursor-pointer" onclick="openVideoPlayer(${index})">
                     <div class="relative aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-sm transition-all duration-300 group-hover:shadow-indigo-200 group-hover:shadow-2xl">
-                        <video src="/${video.file_path}" preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"></video>
+                        <video src="${BASE_URL}${video.file_path}" preload="metadata" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"></video>
                         
                         <!-- Play Icon Overlay -->
                         <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/40 transition-all duration-300">
@@ -266,7 +266,7 @@ include 'layout/sidebar.php';
         const player = document.getElementById('mainVideoPlayer');
 
         // Setup Meta
-        player.src = '/' + video.file_path;
+        player.src = BASE_URL + video.file_path;
         document.getElementById('playerTitle').innerText = video.file_name;
         document.getElementById('playerUploader').innerText = video.uploader_name;
         document.getElementById('playerSize').innerText = (video.file_size / (1024 * 1024)).toFixed(2) + ' MB';
@@ -305,7 +305,7 @@ include 'layout/sidebar.php';
             grid.innerHTML += `
                 <div onclick="openVideoPlayer(${index})" class="flex gap-3 group cursor-pointer">
                     <div class="relative w-32 flex-shrink-0 aspect-video bg-slate-800 rounded-lg overflow-hidden border border-white/10">
-                        <video src="/${v.file_path}" preload="metadata" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></video>
+                        <video src="${BASE_URL}${v.file_path}" preload="metadata" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></video>
                         <div class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
                             <i class="fas fa-play text-white text-xs"></i>
                         </div>
@@ -344,7 +344,7 @@ include 'layout/sidebar.php';
         const token = localStorage.getItem('auth_token');
 
         try {
-            const res = await fetch(`/api/files/${id}`, {
+            const res = await fetch(BASE_URL + `api/files/${id}`, {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ file_name: name })
@@ -376,7 +376,7 @@ include 'layout/sidebar.php';
         const token = localStorage.getItem('auth_token');
 
         try {
-            const res = await fetch(`/api/files/${id}`, {
+            const res = await fetch(BASE_URL + `api/files/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

@@ -130,7 +130,7 @@
         
         try {
             const token = localStorage.getItem('auth_token');
-            const response = await fetch('/api/categories', {
+            const response = await fetch(BASE_URL + 'api/categories', {
                 headers: { 'Authorization': 'Bearer ' + token }
             });
 
@@ -315,7 +315,7 @@
         const name = document.getElementById('categoryName').value;
         const token = localStorage.getItem('auth_token');
 
-        const url = id ? `/api/categories/${id}` : '/api/categories';
+        const url = id ? BASE_URL + `api/categories/${id}` : BASE_URL + 'api/categories';
         const method = id ? 'PUT' : 'POST';
 
         try {
@@ -350,7 +350,7 @@
 
         try {
             const token = localStorage.getItem('auth_token');
-            const response = await fetch(`/api/categories/${id}`, {
+            const response = await fetch(BASE_URL + `api/categories/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': 'Bearer ' + token }
             });

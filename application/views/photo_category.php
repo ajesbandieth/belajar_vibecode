@@ -10,7 +10,7 @@ include 'layout/sidebar.php';
     <div class="sticky top-16 z-20 bg-slate-50/80 backdrop-blur-md border-b border-slate-200">
         <div class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-4">
             <div class="flex items-center gap-4">
-                <a href="/photos" class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 transition-colors shadow-sm">
+                <a href="<?php echo base_url('photos'); ?>" class="w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 transition-colors shadow-sm">
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <div>
@@ -137,7 +137,7 @@ include 'layout/sidebar.php';
     async function fetchCategoryDetails() {
         const token = localStorage.getItem('auth_token');
         try {
-            const res = await fetch('/api/categories/' + categoryId, {
+            const res = await fetch(BASE_URL + 'api/categories/' + categoryId, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (res.ok) {
@@ -170,7 +170,7 @@ include 'layout/sidebar.php';
                 params.append('category_id', 'uncategorized');
             }
 
-            const response = await fetch(`/api/files?${params.toString()}`, {
+            const response = await fetch(BASE_URL + `api/files?${params.toString()}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             
@@ -210,7 +210,7 @@ include 'layout/sidebar.php';
         photos.forEach((photo, index) => {
             grid.innerHTML += `
                 <div class="group relative aspect-square bg-slate-100 rounded-xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all">
-                    <img src="/${photo.file_path}" alt="${photo.file_name}" 
+                    <img src="${BASE_URL}${photo.file_path}" alt="${photo.file_name}" 
                          onclick="openLightbox(${index})"
                          class="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-500">
                     
@@ -261,7 +261,7 @@ include 'layout/sidebar.php';
         const title = document.getElementById('lightboxTitle');
         const info = document.getElementById('lightboxInfo');
 
-        img.src = '/'+photo.file_path;
+        img.src = BASE_URL + photo.file_path;
         title.innerText = photo.file_name;
         info.innerText = `Uploaded at ${new Date(photo.created_at).toLocaleDateString()}`;
 
@@ -318,7 +318,7 @@ include 'layout/sidebar.php';
         const token = localStorage.getItem('auth_token');
 
         try {
-            const res = await fetch(`/api/files/${id}`, {
+            const res = await fetch(BASE_URL + `api/files/${id}`, {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ file_name: name })
@@ -342,7 +342,7 @@ include 'layout/sidebar.php';
         const token = localStorage.getItem('auth_token');
 
         try {
-            const res = await fetch(`/api/files/${id}`, {
+            const res = await fetch(BASE_URL + `api/files/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

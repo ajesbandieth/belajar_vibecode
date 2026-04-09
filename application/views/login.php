@@ -9,6 +9,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
+    <script>const BASE_URL = '<?php echo base_url(); ?>';</script>
 </head>
 <body class="bg-slate-50 flex items-center justify-center min-h-screen p-4">
     <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-100">
@@ -41,14 +42,14 @@
 
         <div class="mt-8 text-center text-sm text-slate-500">
             Don't have an account? 
-            <a href="/register" class="text-indigo-600 font-semibold hover:underline">Register Now</a>
+            <a href="<?php echo base_url('register'); ?>" class="text-indigo-600 font-semibold hover:underline">Register Now</a>
         </div>
     </div>
 
     <script>
         // Redirect if already logged in
         if (localStorage.getItem('auth_token')) {
-            window.location.href = '/dashboard';
+            window.location.href = BASE_URL + 'dashboard';
         }
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -66,7 +67,7 @@
             };
 
             try {
-                const response = await fetch('/api/users/login', {
+                const response = await fetch(BASE_URL + 'api/users/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
@@ -76,7 +77,7 @@
 
                 if (response.ok) {
                     localStorage.setItem('auth_token', result.data);
-                    window.location.href = '/dashboard';
+                    window.location.href = BASE_URL + 'dashboard';
                 } else {
                     errorDiv.innerText = result.data || 'Login failed. Please check your credentials.';
                     errorDiv.classList.remove('hidden');

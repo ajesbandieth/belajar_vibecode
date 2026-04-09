@@ -9,6 +9,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
     </style>
+    <script>const BASE_URL = '<?php echo base_url(); ?>';</script>
 </head>
 <body class="bg-slate-50 flex items-center justify-center min-h-screen p-4">
     <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-100">
@@ -48,7 +49,7 @@
 
         <div class="mt-8 text-center text-sm text-slate-500">
             Already have an account? 
-            <a href="/login" class="text-indigo-600 font-semibold hover:underline">Sign In</a>
+            <a href="<?php echo base_url('login'); ?>" class="text-indigo-600 font-semibold hover:underline">Sign In</a>
         </div>
     </div>
 
@@ -71,7 +72,7 @@
             };
 
             try {
-                const response = await fetch('/api/users', {
+                const response = await fetch(BASE_URL + 'api/users', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
@@ -82,7 +83,7 @@
                 if (response.ok) {
                     successDiv.innerText = 'Registration successful! Redirecting to login...';
                     successDiv.classList.remove('hidden');
-                    setTimeout(() => window.location.href = '/login', 2000);
+                    setTimeout(() => window.location.href = BASE_URL + 'login', 2000);
                 } else {
                     errorDiv.innerText = result.data || 'Registration failed. Please try again.';
                     errorDiv.classList.remove('hidden');

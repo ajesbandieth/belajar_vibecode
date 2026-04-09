@@ -54,7 +54,7 @@ include 'layout/sidebar.php';
         const empty = document.getElementById('emptyState');
 
         try {
-            const response = await fetch('/api/files/summary', {
+            const response = await fetch(BASE_URL + 'api/files/summary', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const result = await response.json();
@@ -89,9 +89,9 @@ include 'layout/sidebar.php';
 
     function createAlbumCard(id, name, count, coverPath) {
         return `
-            <a href="/photos/category/${id}" class="album-card group relative bg-white rounded-2xl p-3 border border-slate-200 shadow-sm hover:shadow-md transition-all block">
+            <a href="${BASE_URL}photos/category/${id}" class="album-card group relative bg-white rounded-2xl p-3 border border-slate-200 shadow-sm hover:shadow-md transition-all block">
                 <div class="aspect-square bg-slate-100 rounded-xl overflow-hidden relative mb-3">
-                    <img src="/${coverPath}" alt="${name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <img src="${BASE_URL}${coverPath}" alt="${name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold px-2 py-1 rounded-md">
                         ${count} photos

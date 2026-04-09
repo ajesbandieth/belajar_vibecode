@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>const BASE_URL = '<?php echo base_url(); ?>';</script>
     <style>
         body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .sidebar-item:hover { background-color: rgba(79, 70, 229, 0.1); color: #4f46e5; }
