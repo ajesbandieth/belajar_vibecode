@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'AppController/login';
 $route['register'] = 'AppController/register';
 $route['dashboard'] = 'AppController/dashboard';
+$route['categories'] = 'AppController/categories';
 $route['logout'] = 'AppController/logout';
 
 // API Routes
