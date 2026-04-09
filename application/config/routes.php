@@ -58,6 +58,9 @@ $route['login'] = 'AppController/login';
 $route['register'] = 'AppController/register';
 $route['dashboard'] = 'AppController/dashboard';
 $route['categories'] = 'AppController/categories';
+$route['photos'] = 'AppController/photos';
+$route['photos/category/(:num)'] = 'AppController/photo_category/$1';
+$route['videos'] = 'AppController/videos';
 $route['logout'] = 'AppController/logout';
 
 // API Routes
@@ -76,5 +79,7 @@ $route['api/categories/(:num)']['put'] = 'api/CategoryController/update/$1';
 $route['api/categories/(:num)']['delete'] = 'api/CategoryController/destroy/$1';
 
 $route['api/files/upload']['post'] = 'api/FileController/upload';
+$route['api/files/summary']['get'] = 'api/FileController/summary';
 $route['api/files']['get'] = 'api/FileController/index';
+$route['api/files/(:num)']['put'] = 'api/FileController/update/$1';
 $route['api/files/(:num)']['delete'] = 'api/FileController/destroy/$1';

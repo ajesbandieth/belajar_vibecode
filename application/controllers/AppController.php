@@ -19,6 +19,19 @@ class AppController extends CI_Controller {
         $this->load->view('categories');
     }
 
+    public function photos() {
+        $this->load->view('photos');
+    }
+
+    public function photo_category($category_id) {
+        $data['category_id'] = $category_id;
+        $this->load->view('photo_category', $data);
+    }
+
+    public function videos() {
+        $this->load->view('videos');
+    }
+
     public function logout() {
         // We'll handle logout mainly on client side by clearing localStorage,
         // but this endpoint can be used to redirect.

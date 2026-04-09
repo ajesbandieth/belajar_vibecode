@@ -52,7 +52,7 @@
         </div>
 
         <div class="flex items-center gap-2 sm:gap-4">
-            <button class="bg-indigo-600 text-white p-2 sm:px-4 sm:py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2">
+            <button onclick="openUploadModal()" class="bg-indigo-600 text-white p-2 sm:px-4 sm:py-2 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2">
                 <i class="fas fa-plus"></i> <span class="hidden sm:inline">Upload</span>
             </button>
             <div class="flex items-center gap-3 pl-2 sm:pl-4 border-l border-slate-200">
