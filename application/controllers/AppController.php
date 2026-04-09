@@ -15,6 +15,10 @@ class AppController extends CI_Controller {
         $this->load->view('dashboard');
     }
 
+    public function categories() {
+        $this->load->view('categories');
+    }
+
     public function logout() {
         // We'll handle logout mainly on client side by clearing localStorage,
         // but this endpoint can be used to redirect.
