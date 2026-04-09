@@ -11,25 +11,21 @@ class Session_model extends CI_Model {
     }
 
     public function create_session($user_id) {
-        // Clear previous sessions for this user to ensure fresh 1-hour start
+        // Clear previous sessions for this user to ensure only one active session
         $this->db->where('user_id', $user_id);
         $this->db->delete($this->table);
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
-        
-        $this->db->set('token', $token);
-        $this->db->set('user_id', $user_id);
-        // Set expiry to 1 hour from now
-        $this->db->set('expires_at', 'DATE_ADD(NOW(), INTERVAL 1 HOUR)', FALSE);
-        
-        $this->db->insert($this->table);
+        $data = array(
+            'token' => $token,
+            'user_id' => $user_id
+        );
+        $this->db->insert($this->table, $data);
         return $token;
     }
 
     public function get_by_token($token) {
-        $this->db->where('token', $token);
-        $this->db->where('expires_at >', 'NOW()', FALSE);
-        $query = $this->db->get($this->table);
+        $query = $this->db->get_where($this->table, array('token' => $token));
         return $query->row_array();
     }
 
