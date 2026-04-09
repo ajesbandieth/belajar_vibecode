@@ -143,6 +143,9 @@
         // Run auth check on every page using this layout
         checkAuth();
 
+        // Proactive auth check every 5 minutes to handle auto-logout
+        setInterval(checkAuth, 5 * 60 * 1000);
+
         // Global Upload Modal Logic
         async function openUploadModal() {
             const modal = document.getElementById('uploadModal');
