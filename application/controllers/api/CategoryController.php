@@ -31,6 +31,14 @@ class CategoryController extends CI_Controller {
         );
 
         $this->Category_model->create($data);
+        
+        // Buat folder fisik
+        $dir_path = FCPATH . 'assets/uploads/' . $slug;
+        if (!is_dir($dir_path)) {
+            mkdir($dir_path, 0777, true);
+            // Tambahkan index.html untuk security
+            file_put_contents($dir_path . '/index.html', '<!DOCTYPE html><html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>');
+        }
 
         return $this->output
             ->set_status_header(201)
@@ -79,6 +87,20 @@ class CategoryController extends CI_Controller {
         }
 
         if (!empty($update_data)) {
+            // Jika slug berubah, pindahkan folder fisik
+            if (isset($update_data['slug']) && $update_data['slug'] !== $category['slug']) {
+                $old_path = FCPATH . 'assets/uploads/' . $category['slug'];
+                $new_path = FCPATH . 'assets/uploads/' . $update_data['slug'];
+                
+                if (is_dir($old_path) && !is_dir($new_path)) {
+                    rename($old_path, $new_path);
+                } elseif (!is_dir($new_path)) {
+                    // Jika folder lama tidak ada (misal kategori lama dibuat sebelum sistem ini), buat folder baru
+                    mkdir($new_path, 0777, true);
+                    file_put_contents($new_path . '/index.html', '<!DOCTYPE html><html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>');
+                }
+            }
+            
             $this->Category_model->update($id, $update_data);
         }
 

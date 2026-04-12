@@ -6,6 +6,7 @@ class FileController extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('File_model');
+        $this->load->model('Category_model');
         $this->load->model('Session_model');
         $this->load->helper(array('form', 'url'));
     }
@@ -30,7 +31,26 @@ class FileController extends CI_Controller {
         $category_id = $this->input->post('category_id');
         $file_name_input = $this->input->post('file_name');
 
-        $config['upload_path']          = './assets/uploads/';
+        // Tentukan upload path berdasarkan kategori
+        $upload_dir = 'assets/uploads/';
+        $category_slug = '';
+        
+        if (!empty($category_id)) {
+            $category = $this->Category_model->get_by_id($category_id);
+            if ($category) {
+                $category_slug = $category['slug'];
+                $upload_dir .= $category_slug . '/';
+                
+                // Pastikan folder kategori ada
+                $full_dir_path = FCPATH . $upload_dir;
+                if (!is_dir($full_dir_path)) {
+                    mkdir($full_dir_path, 0777, true);
+                    file_put_contents($full_dir_path . '/index.html', '<!DOCTYPE html><html><head><title>403 Forbidden</title></head><body><p>Directory access is forbidden.</p></body></html>');
+                }
+            }
+        }
+
+        $config['upload_path']          = './' . $upload_dir;
         $config['allowed_types']        = 'jpg|jpeg|png|gif|mp4|pdf|zip';
         $config['max_size']             = 512000; // ~500 MB in KB
         $config['encrypt_name']         = TRUE;
@@ -97,7 +117,7 @@ class FileController extends CI_Controller {
                     'category_id'   => empty($category_id) ? NULL : $category_id,
                     'original_name' => $upload_data['orig_name'],
                     'file_name'     => $final_file_name,
-                    'file_path'     => 'assets/uploads/' . $upload_data['file_name'],
+                    'file_path'     => $upload_dir . $upload_data['file_name'],
                     'file_size'     => $upload_data['file_size'] * 1024,
                     'file_type'     => $upload_data['file_type']
                 );
